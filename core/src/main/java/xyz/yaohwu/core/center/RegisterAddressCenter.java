@@ -1,4 +1,4 @@
-package xyz.yaohwu.center;
+package xyz.yaohwu.core.center;
 
 import java.util.concurrent.ConcurrentHashMap;
 

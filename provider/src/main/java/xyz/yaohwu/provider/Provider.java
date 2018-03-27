@@ -1,10 +1,10 @@
-package xyz.yaohwu;
+package xyz.yaohwu.provider;
 
 
-import xyz.yaohwu.server.RpcServer;
-import xyz.yaohwu.server.Server;
-import xyz.yaohwu.service.HelloService;
-import xyz.yaohwu.service.RemoteHelloServiceImpl;
+import xyz.yaohwu.core.server.RpcServer;
+import xyz.yaohwu.core.server.Server;
+import xyz.yaohwu.provider.service.HelloService;
+import xyz.yaohwu.provider.service.RemoteHelloServiceImpl;
 
 /**
  * @author yaoh.wu

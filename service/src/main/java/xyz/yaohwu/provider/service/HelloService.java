@@ -1,4 +1,4 @@
-package xyz.yaohwu.service;
+package xyz.yaohwu.provider.service;
 
 /**
  * @author yaoh.wu

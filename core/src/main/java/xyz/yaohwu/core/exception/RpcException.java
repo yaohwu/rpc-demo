@@ -1,4 +1,4 @@
-package xyz.yaohwu.exception;
+package xyz.yaohwu.core.exception;
 
 /**
  * @author yaoh.wu

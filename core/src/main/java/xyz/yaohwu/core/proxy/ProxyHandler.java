@@ -1,8 +1,8 @@
-package xyz.yaohwu.proxy;
+package xyz.yaohwu.core.proxy;
 
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import xyz.yaohwu.RpcContext;
+import xyz.yaohwu.core.RpcContext;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

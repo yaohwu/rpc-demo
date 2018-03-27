@@ -1,7 +1,7 @@
-package xyz.yaohwu;
+package xyz.yaohwu.consumer;
 
-import xyz.yaohwu.proxy.RemoteServiceFactory;
-import xyz.yaohwu.service.HelloService;
+import xyz.yaohwu.core.proxy.RemoteServiceFactory;
+import xyz.yaohwu.provider.service.HelloService;
 
 /**
  * @author yaoh.wu

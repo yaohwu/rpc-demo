@@ -49,4 +49,81 @@ RPC 在各大互联网公司中被广泛使用，如阿里巴巴的hsf、dubbo�
 问题2，寻址方式，可以建立一个服务注册中心，将服务注册进来，保证可以调用。
 问题3，序列化的方案更是非常多，Protobuf、Kryo、Hessian、Jackson 等，出于简单，我们使用 Java 默认的序列化。
 
-## 封装细节 
+## 封装细节
+
+使用 Java 的 socket 来建立通信、默认的序列化方法实现序列化，服务注册中心可以先直接写死。
+
+要让使用者像以本地调用方式调用远程服务，可以使用 java 的动态代理可以做到这一点。
+关于动态代理的知识，可以看[mock 从动态代理到单元测试](https://yaohwu.xyz/#/posts/4);
+动态代理可以有反射或者生成字节码来实现。
+
+借助反射，实现动态代理
+
+```java
+/**
+ * @author yaoh.wu
+ */
+public class AddInvocationHandler implements InvocationHandler {
+    private Add delegate;
+    public AddInvocationHandler(Add delegate) {
+        this.delegate = delegate;
+    }
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable, InvocationTargetException {
+        if ("add".equals(method.getName())) {
+            Integer x = (Integer) args[0];
+            Integer y = (Integer) args[1];
+            System.out.print("x=" + x + " y=" + y + " result=");
+            Integer result = delegate.add(x, y);
+            System.out.println(result);
+            return result;
+        }
+        return method.invoke(delegate, args);
+    }
+}
+```
+
+```java
+/**
+ * @author yaoh.wu
+ */
+public class AdderProxyFactory {
+
+    public static Add createAdderProxy(Add delegate) {
+        return (Add) Proxy.newProxyInstance(
+                delegate.getClass().getClassLoader(),
+                delegate.getClass().getInterfaces(),
+                new AddInvocationHandler(delegate));
+    }
+}
+```
+
+或者借用其他类库生成字节码，来实现动态代理。
+
+出于简单，使用反射。
+
+### 编写服务接口
+
+类似于动态代理要求被代理的对象和代理类都实现同一个接口，远程调用和本地调用都应该实现一个共同的接口，例子中我们这样写这个接口：
+
+```java
+package xyz.yaohwu.provider.service;
+
+/**
+ * @author yaoh.wu
+ */
+public interface HelloService {
+
+    /**
+     * say
+     *
+     * @param word something
+     * @return String
+     */
+    String say(String word);
+}
+```
+
+### 编写服务接口的实现类
+
+

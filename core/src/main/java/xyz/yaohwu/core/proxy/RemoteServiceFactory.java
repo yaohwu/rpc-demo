@@ -1,6 +1,6 @@
-package xyz.yaohwu.proxy;
+package xyz.yaohwu.core.proxy;
 
-import xyz.yaohwu.service.HelloService;
+import xyz.yaohwu.provider.service.HelloService;
 
 import java.lang.reflect.Proxy;
 

@@ -1,4 +1,4 @@
-package xyz.yaohwu;
+package xyz.yaohwu.core;
 
 import java.io.Serializable;
 import java.net.InetSocketAddress;
