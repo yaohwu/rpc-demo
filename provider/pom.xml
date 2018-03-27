@@ -5,8 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>yaohwu.xyz</groupId>
-    <artifactId>rpc</artifactId>
+    <artifactId>provider</artifactId>
     <version>1.0-SNAPSHOT</version>
+
 
     <build>
         <plugins>
@@ -20,4 +21,16 @@
             </plugin>
         </plugins>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>yaohwu.xyz</groupId>
+            <artifactId>service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>yaohwu.xyz</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
