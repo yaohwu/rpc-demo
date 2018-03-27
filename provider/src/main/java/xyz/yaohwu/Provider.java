@@ -12,7 +12,7 @@ import xyz.yaohwu.service.RemoteHelloServiceImpl;
 public class Provider {
     public static void main(String[] args) throws Exception {
 
-        Server rpcServer = new RpcServer(8989, 5);
+        Server rpcServer = new RpcServer(8989, "127.0.0.1", "Cloud", 5);
         //暴露HelloService接口，具体实现为HelloServiceImpl
         rpcServer.register(HelloService.class.getName(), RemoteHelloServiceImpl.class);
         //启动rpc服务

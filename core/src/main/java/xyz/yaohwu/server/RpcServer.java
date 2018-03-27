@@ -2,6 +2,9 @@ package xyz.yaohwu.server;
 
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import xyz.yaohwu.RpcRequestHandlerTask;
+import xyz.yaohwu.center.RegisterAddressCenter;
+import xyz.yaohwu.center.RegisterServicesCenter;
 import xyz.yaohwu.exception.RpcException;
 
 import java.io.IOException;
@@ -20,12 +23,24 @@ public class RpcServer implements Server {
     private boolean isAlive = false;
     private int port = 8989;
     private ExecutorService executor;
+    private String address = "127.0.0.1";
+    private String desc = "cloud";
 
 
-    public RpcServer(int port, int nThreads) {
+    public RpcServer(int port, String address, String desc, int nThreads) {
         this.port = port;
         this.nThreads = nThreads;
+        this.address = address;
+        this.desc = desc;
         init();
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     private void init() {
@@ -68,8 +83,9 @@ public class RpcServer implements Server {
 
     @Override
     public void register(String name, Class clazz) throws Exception {
-        if (RegisterServicesCenter.getRegisterServices() != null) {
+        if (RegisterServicesCenter.getRegisterServices() != null && RegisterAddressCenter.getRegisterAddresses() != null) {
             RegisterServicesCenter.getRegisterServices().put(name, clazz);
+            RegisterAddressCenter.getRegisterAddresses().put(getDesc(), this.address + ":" + this.port);
         } else {
             throw new RpcException("RPC服务未初始化");
         }
@@ -80,5 +96,9 @@ public class RpcServer implements Server {
         String status = (this.isAlive) ? "RPC服务已经启动" : "RPC服务已经关闭";
         System.out.println(status);
         return this.isAlive;
+    }
+
+    public String getDesc() {
+        return desc;
     }
 }

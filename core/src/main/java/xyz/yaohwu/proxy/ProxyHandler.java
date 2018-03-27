@@ -47,7 +47,6 @@ public class ProxyHandler implements InvocationHandler {
         RpcContext rpcContext = new RpcContext();
         rpcContext.setService(service.getName());
         rpcContext.setMethod(method.getName());
-        rpcContext.setRemoteAddress(remoteAddress);
         rpcContext.setArguments(args);
         rpcContext.setArgumentTypes(method.getParameterTypes());
 

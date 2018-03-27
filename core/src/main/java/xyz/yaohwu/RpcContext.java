@@ -43,7 +43,6 @@ public class RpcContext implements Serializable {
     private long timeout = 10000L;
 
 
-
     public long getTimeout() {
         return timeout;
     }
@@ -102,7 +101,7 @@ public class RpcContext implements Serializable {
 
     @Override
     public String toString() {
-        return "xyz.yaohwu.RpcContext{" +
+        return "RpcContext{" +
                 "service='" + service + '\'' +
                 ", method='" + method + '\'' +
                 ", argumentTypes=" + Arrays.toString(argumentTypes) +

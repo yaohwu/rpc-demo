@@ -1,7 +1,7 @@
-package xyz.yaohwu.server;
+package xyz.yaohwu;
 
 
-import xyz.yaohwu.RpcContext;
+import xyz.yaohwu.center.RegisterServicesCenter;
 import xyz.yaohwu.exception.RpcException;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ import java.util.Random;
 public class RpcRequestHandlerTask implements Runnable {
     private Socket socket;
 
-    RpcRequestHandlerTask(Socket accept) {
+    public RpcRequestHandlerTask(Socket accept) {
         this.socket = accept;
     }
 

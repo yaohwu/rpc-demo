@@ -7,7 +7,8 @@ package xyz.yaohwu.service;
 public class RemoteHelloServiceImpl implements HelloService {
     @Override
     public String say(String words) {
-        System.out.println("hello, this is remote hello: " + words);
-        return words;
+        String result = "hello, this is remote hello: " + words;
+        System.out.println(result);
+        return result;
     }
 }
