@@ -21,7 +21,7 @@ public interface Server {
      * @param clazz class
      * @throws Exception e
      */
-    void register(String name, Class clazz) throws Exception;
+    void register(String name, Class<?> clazz) throws Exception;
 
     /**
      * rpc 服务是否存活

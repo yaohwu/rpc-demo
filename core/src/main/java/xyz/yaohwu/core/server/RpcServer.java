@@ -1,8 +1,8 @@
 package xyz.yaohwu.core.server;
 
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import xyz.yaohwu.core.RpcRequestHandlerTask;
+import xyz.yaohwu.core.RpcThreadFactory;
 import xyz.yaohwu.core.center.RegisterAddressCenter;
 import xyz.yaohwu.core.center.RegisterServicesCenter;
 import xyz.yaohwu.core.exception.RpcException;
@@ -47,7 +47,7 @@ public class RpcServer implements Server {
         executor = new ThreadPoolExecutor(5, nThreads,
                 0L, TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<Runnable>(5),
-                new ThreadFactoryBuilder().setNameFormat("server-thread-%s").build());
+                new RpcThreadFactory("server"));
     }
 
     @Override
@@ -82,7 +82,7 @@ public class RpcServer implements Server {
     }
 
     @Override
-    public void register(String name, Class clazz) throws Exception {
+    public void register(String name, Class<?> clazz) throws Exception {
         if (RegisterServicesCenter.getRegisterServices() != null && RegisterAddressCenter.getRegisterAddresses() != null) {
             RegisterServicesCenter.getRegisterServices().put(name, clazz);
             RegisterAddressCenter.getRegisterAddresses().put(getDesc(), this.address + ":" + this.port);

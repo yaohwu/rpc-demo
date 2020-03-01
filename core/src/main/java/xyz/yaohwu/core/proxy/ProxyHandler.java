@@ -1,8 +1,8 @@
 package xyz.yaohwu.core.proxy;
 
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import xyz.yaohwu.core.RpcContext;
+import xyz.yaohwu.core.RpcThreadFactory;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -58,12 +58,11 @@ public class ProxyHandler implements InvocationHandler {
         ExecutorService executor = new ThreadPoolExecutor(5, 10,
                 0L, TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<Runnable>(5),
-                new ThreadFactoryBuilder().setNameFormat("handler-thread-%s").build());
+                new RpcThreadFactory("handler"));
         Object result = null;
 
 
-        @SuppressWarnings("unchecked")
-        Future future = executor.submit((Callable) () -> {
+        Future<?> future = executor.submit((Callable<?>) () -> {
             //执行并返回远程调用结果
             return req(rpcContext);
         });
